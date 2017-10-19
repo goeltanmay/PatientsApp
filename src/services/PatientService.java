@@ -27,9 +27,10 @@ public class PatientService {
 	}
 	
 	@GET
-	@Path("/patient?id={id}")
+	@Path("/patient/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Patient getPatientById(@PathParam("id") String id){
+		System.out.println("inside getPatientById");
 		int pid = Integer.parseInt(id);
 		return patientDao.getPatientById(pid);
 	}
