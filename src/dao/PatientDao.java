@@ -20,10 +20,10 @@ public class PatientDao {
 		con = ConnectionFactory.getConnection();
 		try {
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM patients WHERE id=" + id);
+			ResultSet rs = stmt.executeQuery("SELECT * FROM patients WHERE pid=" + id);
 			if (rs.next()) {
 				Patient patient = new Patient();
-				patient.setId(rs.getInt("id"));
+				patient.setId(rs.getInt("pid"));
 				patient.setFname(rs.getString("fname"));
 				patient.setLname(rs.getString("lname"));
 				patient.setPhone(rs.getString("phone"));
