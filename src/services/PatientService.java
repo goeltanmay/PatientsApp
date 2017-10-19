@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -26,12 +27,11 @@ public class PatientService {
 	}
 	
 	@GET
-	@Path("/patient")
+	@Path("/patient?id={id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Patient getPatientById(){
-		System.out.println("inside getPatientById");
-		int id = Integer.parseInt(request.getParameter("id"));
-		return patientDao.getPatientById(id);
+	public Patient getPatientById(@PathParam("id") String id){
+		int pid = Integer.parseInt(id);
+		return patientDao.getPatientById(pid);
 	}
 	
 	
