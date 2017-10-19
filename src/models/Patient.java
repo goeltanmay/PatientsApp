@@ -18,7 +18,7 @@ public class Patient {
 		return lname;
 	}
 	public void setLname(String lname) {
-		this.fname = lname;
+		this.lname = lname;
 	}
 	public String getSsn() {
 		return ssn;
