@@ -1,23 +1,59 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import factory.ConnectionFactory;
 import models.Patient;
 
 public class PatientDao {
-	public Patient getPatientById(int id){
+	private Statement stmt;
+	private Connection con;
+	private ResultSet rs;
+	private String sql;
+
+	public Patient getPatientById(int id) {
+		con = ConnectionFactory.getConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM patients WHERE id=" + id);
+			if (rs.next()) {
+				Patient patient = new Patient();
+				patient.setId(rs.getInt("id"));
+				patient.setFname(rs.getString("fname"));
+				patient.setLname(rs.getString("lname"));
+				patient.setPhone(rs.getString("phone"));
+				patient.setSsn(rs.getString("ssn"));
+				return patient;
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 		return null;
 	}
-	
-	public List<Patient> getAllPatients(){
-		Patient p1 = new Patient();
-		p1.setId(1); p1.setName("pat1");
-		
-		Patient p2 = new Patient();
-		p2.setId(12); p2.setName("pat45");
+
+	public List<Patient> getAllPatients() {
 		List<Patient> patients = new ArrayList<>();
-		patients.add(p1); patients.add(p2);
+		con = ConnectionFactory.getConnection();
+		try {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM patients");
+			while (rs.next()) {
+				Patient patient = new Patient();
+				patient.setId(rs.getInt("pid"));
+				patient.setFname(rs.getString("fname"));
+				patient.setLname(rs.getString("lname"));
+				patient.setPhone(rs.getString("phone"));
+				patient.setSsn(rs.getString("ssn"));
+				patients.add(patient);
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 		return patients;
 	}
 }

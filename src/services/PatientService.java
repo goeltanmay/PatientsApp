@@ -19,4 +19,13 @@ public class PatientService {
 	public List<Patient> getAllPatients(){
 		return patientDao.getAllPatients();
 	}
+	
+	@GET
+	@Path("/patient")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Patient getPatientById(int id){
+		return patientDao.getPatientById(id);
+	}
+	
+	
 }
