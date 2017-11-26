@@ -8,7 +8,7 @@ public class ConnectionFactory {
 	static final String JDBC_DRIVER ="com.mysql.jdbc.Driver";
 	static final String DB_URL ="jdbc:mysql://localhost:3306/patientsapp";
 	static final String USER = "root";
-    static final String PASS = "123";
+    static final String PASS = "root";
     private static Connection con;
     /**
      * Get a connection to database
